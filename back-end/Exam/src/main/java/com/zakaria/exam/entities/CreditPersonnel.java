@@ -13,5 +13,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreditPersonnel extends Credit{
     private String motif;
-
 }
