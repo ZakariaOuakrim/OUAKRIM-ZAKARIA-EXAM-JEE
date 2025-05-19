@@ -14,6 +14,8 @@ export class ClientServiceService {
   public getClients():Observable<Array<Client>>{
     return this.http.get<Array<Client>>(this.backendHost+"/clients")
   }
-
+  public saveCustomer(customer: Client):Observable<Client>{
+    return this.http.post<Client>(this.backendHost+"/customers",customer);
+  }
   
 }
