@@ -1,7 +1,8 @@
 package com.zakaria.exam;
 
-import com.zakaria.exam.entities.Credit;
-import com.zakaria.exam.entities.Remboursement;
+import com.zakaria.exam.entities.*;
+import com.zakaria.exam.enums.StatutCredit;
+import com.zakaria.exam.enums.TypeBien;
 import com.zakaria.exam.enums.TypeRemboursement;
 import com.zakaria.exam.repositories.ClientRepository;
 import com.zakaria.exam.repositories.CreditRepository;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class ExamApplication {
@@ -80,5 +82,5 @@ public class ExamApplication {
                 }
             }
         };
-        ]
+    }
 }
