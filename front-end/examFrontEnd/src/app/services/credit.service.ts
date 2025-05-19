@@ -10,6 +10,6 @@ export class CreditService {
   backendHost:string ="http://localhost:1111"
   constructor(private http:HttpClient) { }
   public getCredits():Observable<Array<Credit>>{
-    return this.http.get<Array<Credit>>(this.backendHost+"/credits")
+    return this.http.get<Array<Credit>>(this.backendHost+"/credits");
   }
 }

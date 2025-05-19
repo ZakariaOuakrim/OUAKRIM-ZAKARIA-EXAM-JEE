@@ -1,1 +1,59 @@
-<p>credit works!</p>
+<div class="container mt-2">
+    <ng-container *ngIf="credits | async as listCredits; else failureOrLoading">
+      <div class="card">
+        <div class="card-header">Crédits</div>
+        <div class="card-body">
+          <div *ngIf="searchFormGroup">
+            <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchCredits()">
+              <div class="input-group">
+                <label class="input-group-text">Mot-clé :</label>
+                <input type="text" formControlName="keyword" class="form-control" placeholder="Statut, ID client...">
+                <button class="btn btn-info" type="submit">Rechercher</button>
+              </div>
+            </form>
+          </div>
+          <table class="table mt-3">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Date Demande</th>
+                <th>Montant</th>
+                <th>Durée (mois)</th>
+                <th>Taux (%)</th>
+                <th>Statut</th>
+                <th>Date Acceptation</th>
+                <th>Client ID</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let credit of credits | async">
+                <td>{{ credit.id }}</td>
+                <td>{{ credit.dateDemande | date }}</td>
+                <td>{{ credit.montant | number:'1.2-2' }}</td>
+                <td>{{ credit.dureeRemboursement }}</td>
+                <td>{{ credit.tauxInteret }}</td>
+                <td>{{ credit.statut }}</td>
+                <td>{{ credit.dateAcception | date }}</td>
+                <td>{{ credit.clientId }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" >Supprimer</button>
+                  <button class="btn btn-success btn-sm" >Modifier</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </ng-container>
+  
+    <ng-template #failureOrLoading>
+      <ng-container *ngIf="errorMessage; else loading">
+        <div class="text-danger">{{ errorMessage }}</div>
+      </ng-container>
+      <ng-template #loading>
+        Chargement en cours...
+      </ng-template>
+    </ng-template>
+  </div>
+  
