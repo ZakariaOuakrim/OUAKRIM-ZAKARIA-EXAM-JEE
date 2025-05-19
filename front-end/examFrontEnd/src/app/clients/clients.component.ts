@@ -20,6 +20,7 @@ export class ClientsComponent implements OnInit {
   constructor(private clientService : ClientServiceService, private fb : FormBuilder, private router : Router) { }
 
   ngOnInit(): void {
+    this.clients=this.clientService.getClients();
     this.searchFormGroup=this.fb.group({
       keyword : this.fb.control("")
     });

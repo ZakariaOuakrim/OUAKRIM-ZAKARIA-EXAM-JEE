@@ -9,7 +9,7 @@
                 <label class="input-group-text">Keyword :</label>
                 <input type="text" formControlName="keyword" class="form-control">
                 <button class="btn btn-info">
-                  <i class="bi bi-search"></i>
+                    Search
                 </button>
               </div>
             </form>
@@ -19,14 +19,23 @@
             <tr>
               <th>ID</th><th>Name</th><th>Email</th>
             </tr>
+            
             </thead>
             <tbody>
             <tr *ngFor="let c of clients | async">
               <td>{{c.id}}</td>
               <td>{{c.nom}}</td>
               <td>{{c.email}}</td>
-           
-    
+              <td>
+                <button class="btn btn-danger">
+                    Delete
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-success">
+                    Delete
+                </button>
+              </td>
             </tr>
             </tbody>
           </table>

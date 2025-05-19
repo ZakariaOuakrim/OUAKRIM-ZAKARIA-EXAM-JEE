@@ -7,13 +7,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { ClientsComponent } from './clients/clients.component';
+import { CreditComponent } from './credit/credit.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ClientsComponent
+    ClientsComponent,
+    CreditComponent
   ],
   imports: [
     BrowserModule,
