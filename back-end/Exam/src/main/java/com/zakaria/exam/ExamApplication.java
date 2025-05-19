@@ -22,7 +22,7 @@ public class ExamApplication {
         SpringApplication.run(ExamApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     CommandLineRunner start(ClientRepository clientRepository,
                             CreditRepository creditRepository,
                             RemboursementRepository remboursementRepository) {

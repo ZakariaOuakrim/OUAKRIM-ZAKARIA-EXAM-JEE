@@ -37,17 +37,21 @@ public class CreditServiceImpl implements CreditService{
 
     @Override
     public ClientDTO getClient(Long clientId) {
-        return null;
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+        return dtoMapper.fromClient(client);
     }
 
     @Override
     public ClientDTO updateClient(ClientDTO clientDTO) {
-        return null;
+        Client client = dtoMapper.fromClientDTO(clientDTO);
+        Client savedClient = clientRepository.save(client);
+        return dtoMapper.fromClient(savedClient);
     }
 
     @Override
     public void deleteClient(Long clientId) {
-
+        clientRepository.deleteById(clientId);
     }
 
     @Override
@@ -125,7 +129,20 @@ public class CreditServiceImpl implements CreditService{
 
     @Override
     public List<CreditDTO> listAllCredits() {
-        return List.of();
+        List<Credit> credits = creditRepository.findAll();
+        List<CreditDTO> creditDTOS = credits.stream().map(credit -> {
+            if (credit instanceof CreditPersonnel) {
+                CreditPersonnel creditPersonnel = (CreditPersonnel) credit;
+                return dtoMapper.fromCreditPersonnel(creditPersonnel);
+            } else if (credit instanceof CreditImmobilier) {
+                CreditImmobilier creditImmobilier = (CreditImmobilier) credit;
+                return dtoMapper.fromCreditImmobilier(creditImmobilier);
+            } else {
+                CreditProfessionnel creditProfessionnel = (CreditProfessionnel) credit;
+                return dtoMapper.fromCreditProfessionnel(creditProfessionnel);
+            }
+        }).collect(Collectors.toList());
+        return creditDTOS;
     }
 
     @Override
