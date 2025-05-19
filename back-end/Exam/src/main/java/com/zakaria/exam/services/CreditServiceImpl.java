@@ -1,9 +1,7 @@
 package com.zakaria.exam.services;
 
 import com.zakaria.exam.dtos.*;
-import com.zakaria.exam.entities.Client;
-import com.zakaria.exam.entities.CreditImmobilier;
-import com.zakaria.exam.entities.CreditPersonnel;
+import com.zakaria.exam.entities.*;
 import com.zakaria.exam.enums.StatutCredit;
 import com.zakaria.exam.mappers.CreditMapperImpl;
 import com.zakaria.exam.repositories.ClientRepository;
@@ -16,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -53,7 +52,11 @@ public class CreditServiceImpl implements CreditService{
 
     @Override
     public List<ClientDTO> listClients() {
-        return List.of();
+        List<Client> clients = clientRepository.findAll();
+        List<ClientDTO> clientDTOS = clients.stream()
+                .map(dtoMapper::fromClient)
+                .collect(Collectors.toList());
+        return clientDTOS;
     }
 
     @Override
@@ -102,7 +105,17 @@ public class CreditServiceImpl implements CreditService{
 
     @Override
     public CreditDTO getCredit(Long creditId) {
-        return null;
+        Credit credit = creditRepository.findById(creditId)
+                .orElseThrow(() -> new RuntimeException("Credit not found"));
+        if (credit instanceof CreditPersonnel) {
+            return dtoMapper.fromCreditPersonnel((CreditPersonnel) credit);
+        } else if (credit instanceof CreditImmobilier) {
+            return dtoMapper.fromCreditImmobilier((CreditImmobilier) credit);
+        } else if (credit instanceof CreditProfessionnel) {
+            return dtoMapper.fromCreditProfessionnel((CreditProfessionnel) credit);
+        } else {
+            return dtoMapper.fromCredit(credit);
+        }
     }
 
     @Override
