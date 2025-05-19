@@ -28,7 +28,7 @@ public class Credit {
 
     private Date dateAcception;
     private double montant;
-    private int dureeRemboursement; // in months or years
+    private int dureeRemboursement;
     private double tauxInteret;
 
     @ManyToOne
