@@ -1,6 +1,7 @@
 package com.zakaria.exam.entities;
 
 import com.zakaria.exam.enums.TypeBien;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@DiscriminatorValue("CI")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
